@@ -8,15 +8,17 @@ function ItemListContainer({greetings}) {
     const [products, setProducts] = useState([])
     const {categoryId} = useParams()
     
-    console.log(categoryId)
+    //console.log(categoryId)
     
     useEffect(()=>{
       const asyncFunctions = categoryId ? getProductsByCategory : getProducts
-      console.log(asyncFunctions)
+      //console.log(asyncFunctions)
       asyncFunctions(categoryId).then((res) =>{
         setProducts(res)
       })
     },[categoryId])
+
+
 
   return (
     <>

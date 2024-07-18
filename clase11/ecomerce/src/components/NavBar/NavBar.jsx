@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
-import CardWidget from "../CardWidget/CardWidget"
+import CardWidget from "../CardWidget/CardWidget";
 
 
-function NavBar({cartCount, title}) {
+function NavBar({ title }) {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav
+      style={{ width: "80%", margin: "0 auto" }}
+      className="navbar navbar-expand-lg bg-body-tertiary"
+    >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           {title}
@@ -26,18 +29,18 @@ function NavBar({cartCount, title}) {
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="/category/celular"
+                to="/category/phones"
               >
                 Phones
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/category/tablet">
+              <Link className="nav-link" to="/category/tablets">
                 Tablets
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="category/computer">
+              <Link className="nav-link" to="category/computers">
                 Computers
               </Link>
             </li>
@@ -48,7 +51,7 @@ function NavBar({cartCount, title}) {
             </li>
           </ul>
           <form className="d-flex" role="search">
-            <CardWidget cartCount={cartCount} />
+            <CardWidget />
           </form>
         </div>
       </div>
@@ -56,4 +59,4 @@ function NavBar({cartCount, title}) {
   );
 }
 
-export default NavBar
+export default NavBar;

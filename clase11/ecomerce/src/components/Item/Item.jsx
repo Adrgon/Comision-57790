@@ -7,7 +7,7 @@ const Item = ({product}) => {
     <div className="card" style={{ width: "18rem" }}>
       <img
         src={product.img}
-        style={{ width: "50%" }}
+        style={{ width: 100, margin: "0 auto" }}
         className="card-img-top"
         alt={product.name}
       />

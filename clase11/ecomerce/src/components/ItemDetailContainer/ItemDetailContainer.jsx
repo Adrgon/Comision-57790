@@ -11,7 +11,7 @@ const {productId} = useParams()
 useEffect(() => {
   getProductById(productId)
     .then((res) => {
-      console.log(res);
+      //console.log(res);
       setProduct(res);
     })
     .catch((err) => console.log(err));
