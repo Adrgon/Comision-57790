@@ -3,11 +3,12 @@ import { useCart } from "../../hooks/useCart"
 import { addDoc, collection, documentId, getDocs, query, where, writeBatch } from "firebase/firestore"
 import { db } from "../../services/firebase"
 
+
 const Checkout = () => {
     const [loading, setLoading] = useState(false)
     const [orderCreated, setOrderCreated] = useState(false)
 
-    const { cart, totalQuantity, getTotal } = useCart();
+    const { cart, totalQuantity, getTotal, clearCart } = useCart();
     const total = getTotal()
 
 
@@ -28,8 +29,9 @@ const Checkout = () => {
             }
 
             const ids = cart.map((item)=> item.id)
+            //console.log(ids)
 
-            const productRef = collection(db, "products")
+            const productRef = collection(db, "products");
 
             const productsAddedFromFirestore = await getDocs(
                 query(productRef, where(documentId(), "in", ids)))
@@ -59,11 +61,13 @@ const Checkout = () => {
                     const orderAdded = await addDoc(orderRef, objOrder);
                     console.log(`El id de su orden es ${orderAdded.id}`);
                     // limpiar el carrito
+                    
                     setOrderCreated(true)
+                    clearCart()
                 }else {
+                    // falta logica de compra o encargo de productos
                     console.log("Hay productos que estan fuera de stock")
                 }
-
         }catch(error){
             console.log("")
         }finally {
@@ -80,11 +84,27 @@ const Checkout = () => {
     }
   return (
     <>
-        <h1>Checkout</h1>
-        {/* formulario */}
-        <button className="btn btn-info" onClick={createOrder} >Generar Orden</button>
+      <div>
+        {cart.map((item) => (
+          <article key={item.id}>
+            <header>
+              <h2 className="text-secondary text-center bg-info m-5">
+                {item.name}{" "}
+                <span className="badge">Cantidad: {totalQuantity}</span>
+              </h2>
+            </header>
+          </article>
+        ))}
+      </div>
+      <h1 className="text-center">Checkout</h1>
+      {/* formulario */}
+      <div className="d-flex justify-content-center p-3 ">
+        <button className="btn btn-info" onClick={createOrder}>
+          Generar Orden
+        </button>
+      </div>
     </>
-  )
+  );
 }
 
 export default Checkout

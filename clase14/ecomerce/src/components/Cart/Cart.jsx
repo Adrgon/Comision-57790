@@ -15,12 +15,12 @@ const Cart = () => {
       {cart.map((item) => (
         <CartItem key={item.id} {...item} />
       ))}
-      <h3>Total: $ {total}</h3>
-      <div>
-        <button className="btn btn-primary">Limpiar Carrito</button>
-      </div>
-      <div>
-        <Link to="/checkout" className="btn btn-primary">Checkout</Link>
+      <h3 style={{ textAlign: "center" }}>Total: $ {total}</h3>
+      <div className="d-flex justify-content-center ">
+        <button className="btn btn-warning">Limpiar Carrito</button>
+        <Link to="/checkout" className="btn btn-info">
+          Checkout
+        </Link>
       </div>
     </div>
   );

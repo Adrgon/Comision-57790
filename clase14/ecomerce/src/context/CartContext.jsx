@@ -18,6 +18,16 @@ export const CartProvider = ({children}) => {
         }
     }
 
+    const removeItem = (id) => {
+        const cartUpdated = cart.filter((prod) => prod.id !== id)
+        console.log(cartUpdated)
+        setCart(cartUpdated);
+    }
+
+    const clearCart = () => {
+        setCart([]);
+    }
+
     const getTotalQuantity = () => {
         let accu = 0;
         cart.forEach( prod => {
@@ -39,7 +49,15 @@ export const CartProvider = ({children}) => {
 
     // Totalizador de elemento en el carrito
 
-    const obj = { cart, isInCart, addItem, totalQuantity, getTotal };
+    const obj = { 
+        cart, 
+        isInCart, 
+        addItem, 
+        totalQuantity, 
+        getTotal,
+        removeItem,
+        clearCart
+    };
     return (
         <CartContext.Provider value={obj}>
             {children}
